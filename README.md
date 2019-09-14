@@ -1,30 +1,15 @@
-The Network
+PlayDate
 -----------------------------
 
-A Node.js template for creating a social application. 
+We'll have an actual description one day
 
-Getting started
+Important stuff
 -----------------------------
 
 ### Installation
 ```bash
-git clone https://github.com/albertaw/social-network-template.git
-cd social-network-template
+git clone https://github.com/albertaw/playdate.git
+cd playdate
 npm install
-```
-### Setup database
-In another window start MongoDB server
-```bash
-mongod
-```
-Seed the database 
-```bash
-make db
-```
-
-### Launch app
-```bash
 npm start
 ```
-
-
