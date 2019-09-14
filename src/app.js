@@ -1,6 +1,6 @@
 // your application's code
 const express = require('express'),
-	router = express.Router();
+	router = express.Router(),
 	posts = require('./post/post.routes'),
 	users = require('./user/user.routes'),
 	http = require('http'),
@@ -9,6 +9,7 @@ const express = require('express'),
 	mongoose = require('mongoose'),
 	dbUrl = 'mongodb+srv://playdate_user:playdate_pass@main-cluster-ajh0r.mongodb.net/test?retryWrites=true&w=majority',
 	db = mongoose.connect(dbUrl, {safe: true}),
+	api = require('./api'),
 	//Express middleware
 	cookieParser = require('cookie-parser'),
 	session = require('express-session'),
@@ -19,7 +20,8 @@ const express = require('express'),
 	methodOverride = require('method-override');
 
 const app = express();
-app.locals.appTitle = 'The Network';
+const publicPath = path.resolve(__dirname, '..', 'socket/dist');
+app.locals.appTitle = 'Playdate';
 app.locals.admin = false;
 app.locals.error = null;
 //Express configurations
@@ -32,6 +34,14 @@ app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use('/api', api );
+app.use(express.static(publicPath));
+// 404 route
+app.use(function(req, res, next) {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 
 //app.use(cookieParser('3CCC4ACD-6ED1-4844-9217-82131BDCB239'));
 //exposes the res.session object in each request

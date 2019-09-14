@@ -7,13 +7,14 @@
     "start": "node ./src/app.js",
     "test": "mocha test"
   },
-  "repository": "https://github.com/albertaw/social-network-template",
+  "repository": "https://github.com/JPark617/playdate",
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.14.1",
+    "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.0",
     "ejs": "^2.6.1",
     "errorhandler": "^1.4.2",
