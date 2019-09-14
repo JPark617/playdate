@@ -7,7 +7,7 @@ const express = require('express'),
 	path = require('path'),
 	favicon = require('serve-favicon'),
 	mongoose = require('mongoose'),
-	dbUrl = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/blog',
+	dbUrl = 'mongodb+srv://playdate_user:playdate_pass@main-cluster-ajh0r.mongodb.net/test?retryWrites=true&w=majority',
 	db = mongoose.connect(dbUrl, {safe: true}),
 	//Express middleware
 	cookieParser = require('cookie-parser'),
