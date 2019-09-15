@@ -112,12 +112,12 @@ function initMap() {
     {
       title: 'Movies at Harvard',
       latLng: new google.maps.LatLng(42.3770, -71.1167),
-      description: 'nom nom'
+      description: 'Netflix and chill?'
     },
     {
       title: 'Laying on Killian',
       latLng: new google.maps.LatLng(42.3592, -71.0896),
-      description: 'just chilling'
+      description: 'nom nom'
     },
     {
       title: 'Kayaking in Charles River',
@@ -141,12 +141,15 @@ function initMap() {
       map: map,
       title: randomMarkers[i].title
     });
+
     const infowindow = new google.maps.InfoWindow({
       content: contentString,
       maxWidth: 300
     });
     marker.addListener('click', function () {
       closeOtherInfo();
+      map.setZoom(16);
+      map.setCenter(marker.getPosition());
       infowindow.open(marker.get('map'), marker);
       InforObj[0] = infowindow;
     });
