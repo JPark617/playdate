@@ -15,16 +15,18 @@
         "ra-input-rich-text": "^2.0.0",
         "ra-language-english": "^2.0.0",
         "ra-language-french": "^2.0.0",
-        "react": "~16.3.1",
+        "react": "^16.3.2",
         "react-admin": "^2.0.0",
         "react-app-polyfill": "^0.1.3",
-        "react-dom": "~16.3.1",
+        "react-dom": "^16.3.3",
         "react-redux": "~5.0.7",
         "react-router-dom": "^4.2.0",
         "react-scripts": "^2.0.5",
         "recompose": "~0.26.0",
         "redux-form": "~7.4.0",
-        "redux-saga": "~0.16.0"
+        "redux-saga": "~0.16.0",
+        "webpack": "^4.40.2",
+        "webpack-dev-server": "^3.8.0"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -37,5 +39,12 @@
         "not dead",
         "not ie <= 10",
         "not op_mini all"
-    ]
+    ],
+    "devDependencies": {
+        "babel-core": "^6.26.3",
+        "babel-loader": "^8.0.6",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "babel-preset-stage-3": "^6.24.1"
+    }
 }
