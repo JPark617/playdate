@@ -4,7 +4,7 @@ const connect = require('connect-ensure-login');
 
 // models
 const User = require('./models/user');
-const Event = require('../models/event');
+const Event = require('./models/event');
 
 const router = express.Router();
 
@@ -93,8 +93,7 @@ router.post(
             'creator_name'  : req.user.name,
             'creator_fbid'  : req.user.fbid,
             'description'   : req.body.description,
-            'location'      : req.body.location,
-            'coords'        : req.body.coords,
+            'location'      : req.body.coords,
             'start_time'    : req.body.start_time,
             'end_time'      : req.body.end_time,
             'going'         : [req.user.fbid],
@@ -116,7 +115,15 @@ router.post(
     '/deleteevent', // TODO
     connect.ensureLoggedIn(),
     function(req, res) {
-        
+        Event.findOne({ _id: req.body.event_id }, function(err, event) {
+            User.find({}, function(err, users) {
+                for (var user in users) {
+                    user.going_events = user.going_events.filer(function(value, index, arr) { return value != req.body.event_id });
+                    user.interested_events = user.interested_events.filer(function(value, index, arr) { return value != req.body.event_id });
+                    user.save();
+                }
+            });
+        })
         res.send({});
     }
 );

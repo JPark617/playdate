@@ -6,8 +6,7 @@ const EventModelSchema = new mongoose.Schema ({
   creator_name  : String,
   creator_fbid  : String,
   description   : String,
-  location      : String,
-  coords        : [Number],
+  location      : Object,
   start_time    : Number,
   end_time      : Number,
   going         : [String], // list of fbids of people going
