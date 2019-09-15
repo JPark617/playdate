@@ -37,6 +37,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_9M-T1DD9puOBf07gKVyMjlx
 <script>
 var map,
   infoWindow,
+  directionsService,
+  directionsDisplay,
   searchArea,
   searchAreaMarker,
   searchAreaRadius = 1000, // metres
@@ -63,6 +65,9 @@ function initMap() {
     zoom: 15
   });
   infoWindow = new google.maps.InfoWindow;
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay.setMap(map);
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
@@ -112,61 +117,78 @@ function initMarkers() {
   });
 
   var randomMarkers = [{
-      title: 'HackMIT <button type="button">Take me there!</button>',
+      title: 'HackMIT',
       latLng: new google.maps.LatLng(42.3584, -71.0964),
       description: '<h4 id="secondHeading" class="secondHeading">Sept 14 at 11:15 AM - Sept 15 at 11:15 AM </h4>'+
           '<div id="bodyContent">'+
           'Hack for a cause at MITs largest hackathon.' +
           '<p>Facebook event: <a href="https://www.facebook.com/events/374328653274845/">'+
         'https://www.facebook.com/events/374328653274845/</a>.</p>' + 
-        '</h4><i><font color="#708090"><p>Kelly, Jason and 24 other friends are going</p></div>'
+        '<i><font color="#708090"><p>Kelly, Jason and 24 other friends are going</font></p></i></div>'
     },
     {
-      title: 'Pickup Ultimate Frisbee <button type="button">Take me there!</button>',
+      title: 'Pickup Ultimate Frisbee',
       latLng: new google.maps.LatLng(42.3562, -71.1007),
       description: '<h4 id="secondHeading" class="secondHeading">Sept 15 at 1:00 PM - 4:00 PM </h4>'+
           '<div id="bodyContent">'+
-          'Roll up for ultimate frisbee!</p>' + 
-        '</h4><i><font color="#708090">Eric</b> hosted this event</h4></h4><i><font color="#708090"><p>Kelly, Jason and 24 other friends are going</p></div>'
+          'Roll up for ultimate frisbee!' + 
+          '<i><font color="#708090"><p><b>Eric</b> hosted this event</p>' +
+          'Kelly, Jason and 24 other friends are going</font></i></div>'
     },
     {
-      title: 'Movies at Harvard <button type="button">Take me there!</button>',
+      title: 'Movies at Harvard',
       latLng: new google.maps.LatLng(42.3770, -71.1167),
       description: '<h4 id="secondHeading" class="secondHeading">Sept 15 at 9:00 PM - Sept 16 at 12:00 AM </h4>'+
           '<div id="bodyContent">'+
-          'Screening Spiderman-- pull through!</p>' + 
-        '</h4><i><font color="#708090">Kelly hosted this event</h4></h4><i><font color="#708090">'
+          'Screening Spiderman-- pull through!' + 
+          '<i><font color="#708090"><p><b>Kelly</b> hosted this event</p></font><i></div>'
     },
     {
-      title: 'Sunbathing on Killian <button type="button">Take me there!</button>',
+      title: 'Sunbathing on Killian',
       latLng: new google.maps.LatLng(42.3592, -71.0896),
       description: '<h4 id="secondHeading" class="secondHeading">Sept 15 at 12:00 PM - 5:00 PM </h4>'+
           '<div id="bodyContent">'+
-          'B-) </p>' + 
-        '</h4></h4><i><font color="#708090"><p>Justin, Nick and 89 other friends are going</p></div>'
+          'B-)' + 
+          '<i><font color="#708090"><p>Justin, Nick and 89 other friends are going</p></font></i></div>'
     },
     {
-      title: 'Kayaking in Charles River <button type="button">Take me there!</button>',
+      title: 'Kayaking in Charles River',
       latLng: new google.maps.LatLng(42.355846, -71.0888),
       description: '<h4 id="secondHeading" class="secondHeading">Sept 15 at 12:00 PM - 1:30 AM </h4>'+
           '<div id="bodyContent">'+
-          'yeeted into the river </p>' + 
-        '</h4><i><font color="#708090">Alex hosted this event'
+          'yeeted into the river' + 
+          '<i><font color="#708090"><p><b>Alex</b> hosted this event</p></font></i></div>'
     },
     {
-      title: 'Shopping at Newbury St. <button type="button">Take me there!</button>',
+      title: 'Shopping at Newbury St.',
       latLng: new google.maps.LatLng(42.3485, -71.0869),
       description: '<h4 id="secondHeading" class="secondHeading">Sept 15 at 3:00 PM - 5:00 PM </h4>'+
           '<div id="bodyContent">'+
-          'oof $$$$$$$$</p>' + 
-        '</h4><i><font color="#708090">Christine</b> hosted this event</h4></h4><i><font color="#708090"><p>Luke and Nicole are going</p></div>'
+          'oof $$$$$$$$' + 
+          '<i><font color="#708090"><p><b>Christine</b> hosted this event</p>Luke and Nicole are going</font></i></div>'
     }
   ];
 
+  function calcRoute(dest) {
+    var request = {
+      origin: latLng,
+      destination: dest,
+      travelMode: 'WALKING'
+    };
+    directionsService.route(request, function(result, status) {
+      if (status == 'OK') {
+        directionsDisplay.setDirections(result);
+      }
+    });
+  }
+
   for (var i = 0; i < randomMarkers.length; i++) {
     //randomMarkers[i].marker = new google.maps.Marker({
-    var contentString = '<div id="content"><h1>' + randomMarkers[i].title +
-      '</h1><p>' + randomMarkers[i].description;
+    const buttonId = "button" + i;
+    const ourI = i;
+    var contentString = '<div id="content"><h2>' + randomMarkers[i].title + '</h2>' +
+      '<h3><button type="button" id="' + buttonId + '">Take me there!</button></h3>' +
+      '<p>' + randomMarkers[i].description + '</p>';
 
     const marker = new google.maps.Marker({
       position: randomMarkers[i].latLng,
@@ -178,6 +200,7 @@ function initMarkers() {
       content: contentString,
       maxWidth: 300
     });
+
     marker.addListener('click', function () {
       closeOtherInfo();
       map.setZoom(16);
@@ -185,6 +208,10 @@ function initMarkers() {
       infowindow.open(marker.get('map'), marker);
       InforObj[0] = infowindow;
     });
+
+    google.maps.event.addListener(infowindow, 'domready', function() {
+      document.getElementById(buttonId).addEventListener("click", () => { calcRoute(randomMarkers[ourI].latLng); }, false);
+    })
   }
 
   google.maps.event.addListener(searchAreaMarker, 'dragend', function(e) {
