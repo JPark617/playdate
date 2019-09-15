@@ -16,19 +16,29 @@
     font-family: 'Autour One';
     font-size: 22px;
   }
+
 </style>
 
 <body>
+  <script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+    output.innerHTML = this.value;
+    }
+  </script>
   <div class="title">p l a y d a t e</div>
   <input type="button" class="tablink" onclick="location.href='index.html';" value="Feed" />
   <input type="button" class="tablink" onclick="location.href='profile.html';" value="Profile" />
   <input type="button" class="tablink" onclick="location.href='map.html';" value="Map" />
-
-  <center><h1>Create Event</h1></center>
+  <center><h1>Create Recommendation</h1></center>
   <form action="/action_page.php" method="get">
-  <center>Title:</center> <center><input type="text" name="title"></center><br>
-  <center>Date:</center> <center><input type = "date" name = "date"></center><br>
-  <center>Time:</center> <center><input type="time" name="time"></center><br>
+  <center>Name:</center> <center><input type="text" name="title"></center><br>
+  <center>Link:</center> <center><input type="text" name="link"></center><br>
+  <center>How Good Was it (From 0 to 10): <p>Value: <span id="demo"></span></p></center>
+  <center><input type="range" min="1" max="10" value="5" id="myRange"></center>
   <center>To Who:</center>
     <form>
     <center><input type="radio" name="privacy" value="Everyone in the Area">Everyone in the Area</center><br>
@@ -41,7 +51,7 @@
         <input type="checkbox" name="group3" value="Frat Group"> Frat Group<br>
       </form>
     <br>
-  <center><input type="button" value="Submit" onclick="location.href='EventCreated.html';"></center>
+  <center><input type="button" value="Submit" onclick="location.href='RecCreated.html';"></center>
   </form>
 
     <!-- About Section End -->
