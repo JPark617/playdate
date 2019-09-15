@@ -2,60 +2,138 @@
 <html>
 
 <head>
-  <title>News Feed</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <link rel="stylesheet" type="text/css" href="style.css">
   <link href='https://fonts.googleapis.com/css?family=Autour One' rel='stylesheet'>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-    integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  <!-- <link rel="stylesheet" href="/static/css/style.css"> -->
-  <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <style>
   body {
     font-family: 'Autour One';
-    font-size: 22px;
+    font-size: 18px;
   }
 </style>
 
 <body>
-  <div class="title">p l a y d a t e</div>
-  <input type="button" class="tablink" onclick="location.href='index.html';" value="Feed" />
-  <input type="button" class="tablink" onclick="location.href='profile.html';" value="Profile" />
-  <input type="button" class="tablink" onclick="location.href='map.html';" value="Map" />
 
-  <div class="container feed-container">
-    <div class="row">
-      <div class="col">
-        <div id="new-story">
-          <!-- new story input inserted here -->
-        </div>
-      </div>
+
+  <!-- <div class="title">p l a y d a t e</div>
+  <a class="tablink" href='index.html'> Feed</a>
+  <input type="button" class="tablink" onclick="location.href='profile.html';" />
+  <input type="button" class="tablink" onclick="location.href='map.html';" /> -->
+
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">p l a y d a t e </a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> -->
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="index.html">Feed</a>
+      <a class="nav-item nav-link active" href="profile.html">My Profile</a>
+      <a class="nav-item nav-link active" href="map.html">Event Map</a>
+
     </div>
-    <div class="row">
-      <div id="stories" class="col">
-        <!-- stories are inserted here -->
+    <!-- </div> -->
+  </nav>
+
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action">
+      <img width="80px" height="80px" style="border-radius: 1000px; background-position:center"
+        src="https://sophosnews.files.wordpress.com/2016/04/liar.jpg">
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-1">Kathie Billydong
+        </p>
+        <small>29 seconds ago</small>
       </div>
-    </div>
+      <small>recommends the movie Teeth because it's funny and unique</small>
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action">
+      <img width="80px" height="80px" style="border-radius: 1000px"
+        src="http://lhsneuro.weebly.com/uploads/1/3/0/3/13032054/1386249.png?130">
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-1">Pranav Lalgudi
+        </p>
+        <small>1 minute ago</small>
+      </div>
+      <small>created an event: Soccer </small>
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action">
+      <img width="80px" height="80px" style="border-radius: 1000px;"
+        src="https://www.rd.com/wp-content/uploads/2017/07/The-Word-That-Makes-55-of-People-Yawn-When-They-Read-It-ft.jpg">
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-1">Manning Chuor
+        </p>
+        <small>4 minutes ago</small>
+      </div>
+      <small>recommends Charlie bit my finger on YouTube because it made him laugh</small>
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action">
+      <img width="80px" height="80px" style="border-radius: 1000px"
+        src="http://topfunia.com/wp-content/uploads/2015/05/Dog-Beard-Girl-3.jpg">
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-1">Kelly Ho
+        </p>
+        <small> 17 minutes ago</small>
+      </div>
+      <small>recommended an event: Nap with Friends</small>
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action">
+      <img width="80px" height="80px" style="border-radius: 1000px"
+        src="http://topfunia.com/wp-content/uploads/2015/05/Dog-Beard-Girl-3.jpg">
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-1">Titash Biswas
+        </p>
+        <small>18 minutes ago</small>
+      </div>
+      <small>wants to have a Dance Party</small>
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action">
+      <img width="80px" height="80px" style="border-radius: 1000px"
+        src="http://topfunia.com/wp-content/uploads/2015/05/Dog-Beard-Girl-3.jpg">
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-1">Nick Ignacio
+        </p>
+        <small>38 minutes ago</small>
+      </div>
+      <small>recommends the movie Borat because it's quotable and good</small>
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action">
+      <img width="80px" height="80px" style="border-radius: 1000px"
+        src="http://topfunia.com/wp-content/uploads/2015/05/Dog-Beard-Girl-3.jpg">
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-1">Stefan Wan
+        </p>
+        <small>1 hour ago</small>
+      </div>
+      <small>created an event: Studying for Chinese III</small>
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action">
+      <img width="80px" height="80px" style="border-radius: 1000px"
+        src="http://topfunia.com/wp-content/uploads/2015/05/Dog-Beard-Girl-3.jpg">
+      <div class="d-flex w-100 justify-content-between">
+        <p class="mb-1">Larry Qui
+        </p>
+        <small>1 hour ago</small>
+      </div>
+      <small>is going to an event: Catan</small>
+    </a>
   </div>
-  <div id="app"></div>
+  <!-- <div class="title">p l a y d a t e</div>
+  <a class="tablink" href='index.html'> Feed</a>
+  <input type="button" class="tablink" onclick="location.href='profile.html';" />
+  <input type="button" class="tablink" onclick="location.href='map.html';" /> -->
+
 </body>
-<!--
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="/static/js/api.js"></script>
-  <script src="/static/js/navbar.js"></script>
-  <script src="/static/js/feed.js"></script>
-  <script src="/static/js/index.js"></script>
-  -->
 
 </html>
-
-<!-- a.button {
--webkit-appearance: button;
--moz-appearance: button;
-appearance: button;
-
-text-decoration: none;
-color: initial;
-} -->
