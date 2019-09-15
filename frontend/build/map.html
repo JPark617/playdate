@@ -186,8 +186,8 @@ function initMarkers() {
     //randomMarkers[i].marker = new google.maps.Marker({
     const buttonId = "button" + i;
     const ourI = i;
-    var contentString = '<div id="content"><h1>' + randomMarkers[i].title + '</h1>' +
-      '<h2><button type="button" id="' + buttonId + '">Take me there!</button></h2>' +
+    var contentString = '<div id="content"><h2>' + randomMarkers[i].title + '</h2>' +
+      '<h3><button type="button" id="' + buttonId + '">Take me there!</button></h3>' +
       '<p>' + randomMarkers[i].description + '</p>';
 
     const marker = new google.maps.Marker({
