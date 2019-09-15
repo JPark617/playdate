@@ -19,17 +19,18 @@
 </style>
 
 <body>
-  <div class="title" style = 'width: 40%'>p l a y d a t e</div>
-  <input type="button" class="tablink" onclick="location.href='index.html';" value="Feed" style = 'width:20%'/>
-  <input type="button" class="tablink" onclick="location.href='profile.html';" value="Profile" style = 'width:20%'/>
-  <input type="button" class="tablink" onclick="location.href='map.html';" value="Map" style = 'width:20%'/>
-
+  <div class="title">p l a y d a t e</div>
+  <input type="button" class="tablink" onclick="location.href='index.html';" value="Feed" />
+  <input type="button" class="tablink" onclick="location.href='profile.html';" value="Profile" />
+  <input type="button" class="tablink" onclick="location.href='map.html';" value="Map" />
 
   <form action="/action_page.php" method="get">
-  First name: <input type="text" name="fname"><br>
-  Last name: <input type="text" name="lname"><br>
-  <input type="submit" value="Submit">
+  <center>Title:</center> <center><input type="text" name="title"></center><br>
+  <center>Date:</center> <center><input type = "date" name = "date"></center><br>
+  <center>Time:</center> <center><input type="time" name="time"></center><br>
+  <center><input type="button" value="Submit" onclick="location.href='EventCreated.html';"></center>
   </form>
+
     <!-- About Section End -->
 
 
