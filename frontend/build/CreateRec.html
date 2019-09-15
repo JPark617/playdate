@@ -20,15 +20,6 @@
 </style>
 
 <body>
-  <script>
-    var slider = document.getElementById("myRange");
-    var output = document.getElementById("demo");
-    output.innerHTML = slider.value;
-
-    slider.oninput = function() {
-    output.innerHTML = this.value;
-    }
-  </script>
   <div class="title">p l a y d a t e</div>
   <input type="button" class="tablink" onclick="location.href='index.html';" value="Feed" />
   <input type="button" class="tablink" onclick="location.href='profile.html';" value="Profile" />
@@ -92,9 +83,16 @@
     </div>
   </div> -->
 </body>
-<script src="/static/js/api.js"></script>
-<script src="/static/js/navbar.js"></script>
-<script src="/static/js/profile.js"></script>
+<script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+    output.innerHTML = this.value;
+    }
+  </script>
+
 
 
 </html>
