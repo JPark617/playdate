@@ -1,6 +1,5 @@
 Playdate
 -----------------------------
-
 Playdate is a web application that lets you explore events and recommendations from friends and others in your area.
 Just schedule an activity anywhere, anytime, and open it up to your friends or to the public.
 Or, make recommendations for movies and shows that your friends might be interested in.
@@ -21,8 +20,20 @@ Playdate was built in under 24 hours as part of HackMIT 2019, a hackathon based 
 Our application is built on React (front-end) and Node.js (back-end).
 We make heavy use of Google Maps through the Google Cloud API to provide location functionality in planning activities.
 
+Challenges
+-----------------------------
+Our team began HackMIT this year with almost no web development experience.
+None of us had ever built a web application completely from scratch, and one of our biggest hurdles was simply figuring out how to even begin.
+That, coupled with our plan to implement the Google Maps API, seemed insurmountable from Hour 1.
+Despite this, we pulled through after several dozen online tutorials, a waffle-and-ice-cream break, and expert StackOverflow usage.
+We like to think that we learned a good deal from this experience with regards to workflow, team environments, and actual web development.
+
 How to use
 -----------------------------
+### Website
+Use our web app online [here!](https://playdate-app.herokuapp.com "Playdate").
+
+Or, if you'd prefer...
 ### Installation
 ```bash
 git clone https://github.com/JPark617/playdate.git
@@ -30,6 +41,3 @@ cd playdate
 npm install
 npm start
 ```
-
-### Website
-Use our web app online [here!](https://playdate-app.herokuapp.com "Playdate").
