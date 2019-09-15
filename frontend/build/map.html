@@ -1,35 +1,164 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Cool Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
+<head>
+<title>Simple Map</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta charset="utf-8">
+<style>
+  html, body, #map-canvas {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px
+  }
+</style>
+
+<div id="map-canvas" style="border: 2px solid #3872ac;"></div>
+
+<script>
+var map,
+  searchArea,
+  searchAreaMarker,
+  searchAreaRadius = 1000, // metres
+  startLat = 42.3549,
+  startLng = -71.1020;
+
+var InforObj = [];
+
+
+function closeOtherInfo() {
+  if (InforObj.length > 0) {
+      /* detach the info-window from the marker ... undocumented in the API docs */
+      InforObj[0].set("marker", null);
+      /* and close it */
+      InforObj[0].close();
+      /* blank the array */
+      InforObj.length = 0;
+  }
+}
+
+function initMap() {
+  var startLatLng = new google.maps.LatLng(startLat, startLng)
+
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    center: startLatLng,
+    zoom: 12
+  });
+
+  searchArea = new google.maps.Circle({
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.3,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.1,
+    map: map,
+    center: startLatLng,
+    radius: searchAreaRadius
+  });
+
+  searchAreaMarker = new google.maps.Marker({
+    position: startLatLng,
+    map: map,
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    icon: {
+            url: "https://www.freepngimg.com/download/map/66959-map-google-icons-maps-computer-systems-navigation.png",
+            scaledSize: new google.maps.Size(50, 50)
+          },
+    title: 'searchAreaMarker'
+  });
+
+  var randomMarkers = [{
+      title: 'HackMIT',
+      latLng: new google.maps.LatLng(42.3584, -71.0964),
+      description: '<h3 id="thirdHeading" class="thirdHeading">Time: 11:15 AM September 14 to 11:15 AM September 15 (Ongoing) </h3>'+
+          '<div id="bodyContent">'+
+          'Hack for a cause at MITs largest hackathon.' +
+          '<p>Facebook event: <a href="https://www.facebook.com/events/374328653274845/">'+
+        'https://www.facebook.com/events/374328653274845/</a>.</p>'
+    },
+    {
+      title: 'Pickup Ultimate Frisbee',
+      latLng: new google.maps.LatLng(42.3562, -71.1007),
+      description: 'Roll up for some frisbee!'
+    },
+    {
+      title: 'Movies at Harvard',
+      latLng: new google.maps.LatLng(42.3770, -71.1167),
+      description: 'nom nom'
+    },
+    {
+      title: 'Laying on Killian',
+      latLng: new google.maps.LatLng(42.3592, -71.0896),
+      description: 'just chilling'
+    },
+    {
+      title: 'Kayaking in Charles River',
+      latLng: new google.maps.LatLng(42.355846, -71.0888),
+      description: 'yeeeet'
+    },
+    {
+      title: 'Shopping at Newbury St.',
+      latLng: new google.maps.LatLng(42.3485, -71.0869),
+      description: '$$$$$$$$$'
+    }
+  ];
+
+  for (var i = 0; i < randomMarkers.length; i++) {
+    //randomMarkers[i].marker = new google.maps.Marker({
+    var contentString = '<div id="content"><h1>' + randomMarkers[i].title +
+      '</h1><p>' + randomMarkers[i].description;
+
+    const marker = new google.maps.Marker({
+      position: randomMarkers[i].latLng,
+      map: map,
+      title: randomMarkers[i].title
+    });
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      maxWidth: 300
+    });
+    marker.addListener('click', function () {
+      closeOtherInfo();
+      infowindow.open(marker.get('map'), marker);
+      InforObj[0] = infowindow;
+    });
+  }
+
+  google.maps.event.addListener(searchAreaMarker, 'dragend', function(e) {
+    startLatLng = e.latLng;
+
+    searchArea.setOptions({
+      center: startLatLng
+    });
+
+    map.panTo(searchAreaMarker.getPosition());
+
+    // find markers in area
+    for (var i = 0; i < randomMarkers.length; i++) {
+      console.log('Marker: ' + randomMarkers[i].marker.title + ', position: ' + randomMarkers[i].marker.getPosition());
+
+      if (google.maps.geometry.spherical.computeDistanceBetween(randomMarkers[i].marker.getPosition(), searchArea.getCenter()) <= searchArea.getRadius()) {
+        console.log('=> is in searchArea');
+      } else {
+        console.log('=> is NOT in searchArea');
       }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_9M-T1DD9puOBf07gKVyMjlxhVQZpKu0&callback=initMap"
-    async defer></script>
-  </body>
-</html>
+    }
+  });
+}
+
+</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_9M-T1DD9puOBf07gKVyMjlxhVQZpKu0&callback=initMap">
+</script>
+
+
+
+
+
+
+
+
+
+
