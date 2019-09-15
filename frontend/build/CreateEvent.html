@@ -30,8 +30,15 @@
   <center>Time:</center> <center><input type="time" name="time"></center><br>
   <center>To Who:</center>
     <form>
+    <center><input type="radio" name="privacy" value="Everyone in the Area">Everyone in the Area</center><br>
     <center><input type="radio" name="privacy" value="Friends Only" checked>Friends Only</center>
-    <center><input type="radio" name="privacy" value="Everyone in the Area">Everyone in the Area</center></form>
+    </form>
+      <form style="margin-left: 48%"> 
+        <input type="checkbox" name="group" value="General" checked> All Friends<br>
+        <input type="checkbox" name="group1" value="Chinese"> Chinese III<br>
+        <input type="checkbox" name="group2" value="Next"> Next Gang<br>
+        <input type="checkbox" name="group3" value="Frat Group"> Frat Group<br>
+      </form>
     <br>
   <center><input type="button" value="Submit" onclick="location.href='EventCreated.html';"></center>
   </form>
