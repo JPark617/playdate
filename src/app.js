@@ -60,7 +60,6 @@ app.use(function (req, res, next) {
 	next();
 });
 
-
 if ('development' === app.get('env')) {
 	app.use(errorHandler());
 }

@@ -21,14 +21,14 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_9M-T1DD9puOBf07gKVyMjlx
 
 <script>
 var map,
+  infoWindow,
   searchArea,
   searchAreaMarker,
   searchAreaRadius = 1000, // metres
-  startLat = 10, // 42.3549,
-  startLng = 10; // -71.1020;
-
-var InforObj = [];
-
+  startLat = 42.3549,
+  startLng = -71.1020,
+  latLng,
+  InforObj = [];
 
 function closeOtherInfo() {
   if (InforObj.length > 0) {
@@ -42,20 +42,27 @@ function closeOtherInfo() {
 }
 
 function initMap() {
-  var startLatLng = new google.maps.LatLng(startLat, startLng);
+  latLng = new google.maps.LatLng(startLat, startLng);
   map = new google.maps.Map(document.getElementById('map-canvas'), {
-    center: startLatLng,
+    center: latLng,
     zoom: 15
   });
+  infoWindow = new google.maps.InfoWindow;
 
-  console.log(startLatLng);
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+    latLng = pos;
+    initMarkers();
+  }
   if (navigator.geolocation) {
-    console.log("hi!");
     navigator.geolocation.getCurrentPosition(function(position) {
-      startLat = position.coords.latitude;
-      startLng = position.coords.longitude;
-      startLatLng = new google.maps.LatLng(startLat, startLng);
-      map.setCenter(startLatLng);
+      latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      map.setCenter(latLng);
+      initMarkers();
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -63,15 +70,9 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-                          'Error: The Geolocation service failed.' :
-                          'Error: Your browser doesn\'t support geolocation.');
-    infoWindow.open(map);
-  }
-  
-  console.log(startLatLng);
+}
+
+function initMarkers() {
   searchArea = new google.maps.Circle({
     strokeColor: '#FF0000',
     strokeOpacity: 0.3,
@@ -79,12 +80,12 @@ function initMap() {
     fillColor: '#FF0000',
     fillOpacity: 0.1,
     map: map,
-    center: startLatLng,
+    center: latLng,
     radius: searchAreaRadius
   });
 
   searchAreaMarker = new google.maps.Marker({
-    position: startLatLng,
+    position: latLng,
     map: map,
     draggable: true,
     animation: google.maps.Animation.DROP,

@@ -32,6 +32,8 @@
     "validator": "^4.1.0"
   },
   "devDependencies": {
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
     "chai": "^3.3.0",
     "expect": "^1.11.1",
     "mocha": "^2.3.3",
